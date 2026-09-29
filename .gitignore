@@ -1,0 +1,22 @@
+# Raw source photography and logo originals.
+# Only the curated, renamed copies under assets/img/ are used by the site.
+# Leading slashes anchor these to the repo root — without them, Git on Windows
+# (case-insensitive) would also exclude assets/img/yoga, /leadership and /logos.
+/Yoga/
+/Leadership/
+/Energy & Spatial Consultant/
+/Logos/
+
+# Source asset already inlined into the pages as SVG markup
+/whatsapp-svgrepo-com.svg
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Dependencies (none currently, but guard against stray installs)
+node_modules/

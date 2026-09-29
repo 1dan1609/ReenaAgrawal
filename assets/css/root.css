@@ -1,0 +1,492 @@
+@import url("base.css");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --ivory: #f3ede0;
+  --ivory-deep: #ece3d1;
+  --paper-line: #d8ccae;
+  --charcoal: #2a2620;
+  --charcoal-soft: #514a3d;
+  --gold: #a9782f;
+  --gold-bright: #c99a3f;
+  --gold-foil: #e3c477;
+  --stamp-red: #7c2f2a;
+
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  color-scheme: light;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 38px, rgba(42,38,32,0.035) 38px 39px);
+}
+
+::selection { background: var(--gold-foil); color: var(--charcoal); }
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+a { transition: opacity 0.2s ease; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--charcoal);
+}
+
+.eyebrow-mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.seal-mark { color: currentColor; }
+
+/* ---------------- Header ---------------- */
+
+.site-header {
+  background: rgba(243, 237, 224, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--paper-line);
+}
+
+.site-brand {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--charcoal);
+}
+
+.site-brand .seal-mark {
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
+}
+
+.nav-menu a, .nav-dropdown-trigger { color: var(--charcoal-soft); font-size: 0.95rem; }
+.nav-dropdown-trigger { font-family: inherit; }
+
+.nav-dropdown {
+  background: var(--ivory);
+  border: 1px solid var(--paper-line);
+  box-shadow: 0 18px 40px -18px rgba(42,38,32,0.35);
+}
+
+.nav-dropdown a { border-bottom: 1px solid var(--paper-line); }
+.nav-dropdown a:last-child { border-bottom: none; }
+.nav-dropdown a strong { font-family: var(--font-display); font-weight: 500; font-size: 1rem; }
+.nav-dropdown a span { font-size: 0.8rem; color: var(--charcoal-soft); }
+.nav-dropdown a:hover { background: var(--ivory-deep); }
+
+.nav-cta {
+  border: 1px solid var(--gold);
+  padding: 0.55rem 1.15rem;
+  color: var(--charcoal) !important;
+  font-family: var(--font-mono);
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.nav-cta:hover { background: var(--gold); color: var(--ivory) !important; }
+
+@media (max-width: 860px) {
+  .nav-menu { background: var(--ivory); border-left: 1px solid var(--paper-line); }
+}
+
+/* ---------------- Hero: Passport spread ---------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 7vw, 5rem);
+}
+
+.passport-spread {
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid var(--paper-line);
+  background:
+    linear-gradient(90deg, transparent 49.7%, var(--paper-line) 49.7% 50.3%, transparent 50.3%),
+    var(--ivory);
+  box-shadow: 0 40px 80px -40px rgba(42,38,32,0.45);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+
+.passport-spread::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(169,120,47,0.35);
+  pointer-events: none;
+}
+
+.passport-seal {
+  position: absolute;
+  top: 14%;
+  left: 5%;
+  width: clamp(180px, 26vw, 300px);
+  height: clamp(180px, 26vw, 300px);
+  color: var(--stamp-red);
+  opacity: 0.07;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bio-data {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bio-data__type {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.bio-data__name {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 0.98;
+}
+
+.bio-data__tagline {
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--charcoal-soft);
+  font-style: italic;
+}
+
+.bio-data__fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--paper-line);
+}
+
+.bio-data__fields dt {
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  align-self: start;
+  padding-top: 0.15rem;
+}
+
+.bio-data__fields dd {
+  margin: 0;
+  color: var(--charcoal);
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--charcoal);
+}
+
+.btn--primary { background: var(--charcoal); color: var(--ivory); }
+.btn--primary:hover { background: var(--gold); border-color: var(--gold); color: var(--charcoal); }
+.btn--ghost { background: transparent; color: var(--charcoal); }
+.btn--ghost:hover { background: var(--charcoal); color: var(--ivory); }
+
+.passport-photo {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 360px);
+  margin: clamp(1.75rem, 4vw, 3rem) auto;
+  border: 6px solid var(--ivory);
+  outline: 1px solid var(--charcoal);
+  box-shadow: 0 24px 50px -24px rgba(42,38,32,0.5);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  align-self: center;
+}
+
+.passport-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.12) saturate(1.05) contrast(1.02);
+}
+
+@media (max-width: 860px) {
+  .passport-spread {
+    grid-template-columns: 1fr;
+    background: var(--ivory);
+  }
+  .passport-photo { margin: 0 auto clamp(1.75rem, 4vw, 3rem); order: -1; aspect-ratio: 16/10; }
+}
+
+/* ---------------- Section shell ---------------- */
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section-head {
+  max-width: 62ch;
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  margin-top: 0.6rem;
+}
+
+/* ---------------- Visa panels (verticals) ---------------- */
+
+.visa-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--paper-line);
+  border: 1px solid var(--paper-line);
+}
+
+.visa-panel {
+  position: relative;
+  background: var(--ivory);
+  padding: clamp(1.85rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-height: 420px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visa-panel[data-revealed="true"] { opacity: 1; transform: translateY(0); }
+.visa-panel:nth-child(2) { transition-delay: 0.12s; }
+.visa-panel:nth-child(3) { transition-delay: 0.24s; }
+
+.visa-panel__stamp {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 76px;
+  height: 76px;
+  color: var(--stamp-red);
+  opacity: 0.85;
+}
+
+.visa-panel__no {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.visa-panel__brand {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--charcoal-soft);
+}
+
+.visa-panel h3 {
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.visa-panel p { color: var(--charcoal-soft); font-size: 0.97rem; }
+
+.visa-panel__link {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding-top: 1rem;
+  border-top: 1px solid var(--paper-line);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.visa-panel__link .arrow { transition: transform 0.2s ease; }
+.visa-panel:hover .visa-panel__link .arrow { transform: translateX(4px); }
+
+@media (max-width: 900px) {
+  .visa-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------- Endorsements (honors) ---------------- */
+
+.endorsements {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+
+.endorsements h2 { color: var(--ivory); }
+.endorsements .section-head p { color: rgba(243,237,224,0.72); }
+.endorsements .eyebrow-mono { color: var(--gold-foil); }
+
+.ledger {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(243,237,224,0.22);
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(243,237,224,0.22);
+}
+
+.ledger-row__mark {
+  width: 22px;
+  height: 22px;
+  color: var(--gold-foil);
+  flex-shrink: 0;
+}
+
+.ledger-row__text { font-size: 1.02rem; }
+.ledger-row__text strong { font-family: var(--font-display); font-weight: 500; }
+
+.ledger-row__date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(243,237,224,0.6);
+  white-space: nowrap;
+}
+
+/* ---------------- Contact ---------------- */
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-channel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1.1rem;
+  border: 1px solid var(--paper-line);
+}
+
+.contact-channel svg { width: 22px; height: 22px; color: var(--gold); flex-shrink: 0; margin-top: 0.15rem; }
+.contact-channel strong { font-family: var(--font-display); font-weight: 500; display: block; }
+.contact-channel span { font-size: 0.9rem; color: var(--charcoal-soft); }
+
+.form-card {
+  border: 1px solid var(--paper-line);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  background: var(--ivory-deep);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal-soft);
+}
+
+.field input, .field select, .field textarea {
+  border: 1px solid var(--paper-line);
+  background: var(--ivory);
+  padding: 0.75rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--charcoal);
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.field textarea { resize: vertical; min-height: 110px; }
+
+.form-status {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-top: 0.75rem;
+  min-height: 1.2em;
+}
+
+.form-status[data-state="notice"] { color: var(--stamp-red); }
+.form-status[data-state="pending"] { color: var(--gold); }
+
+/* ---------------- Footer ---------------- */
+
+.site-footer {
+  background: var(--charcoal);
+  color: rgba(243,237,224,0.78);
+}
+
+.site-footer h4 {
+  color: var(--ivory);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.site-footer a:hover { opacity: 0.7; }
+
+.footer-brand .seal-mark { width: 36px; height: 36px; color: var(--gold-foil); margin-bottom: 1rem; }
+
+.footer-links li { margin-bottom: 0.6rem; font-size: 0.92rem; }
+
+.site-footer__bottom {
+  border-top: 1px solid rgba(243,237,224,0.16);
+  color: rgba(243,237,224,0.55);
+}
