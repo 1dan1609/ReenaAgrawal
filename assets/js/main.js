@@ -37,28 +37,98 @@
     });
   }
 
+  /* Lead forms post to Formspree in the background so the visitor stays on
+     the page. Without fetch (or JS at all) the form's own action/method
+     still submit it the ordinary way. */
+  var CONTACT_FALLBACK = "email reena2851@gmail.com or WhatsApp +91 80802 12851";
+
+  function postForm(form, data) {
+    return fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (body) {
+        return { ok: response.ok, body: body };
+      });
+    });
+  }
+
+  function hasAttachment(form) {
+    return Array.prototype.some.call(form.querySelectorAll('input[type="file"]'), function (input) {
+      return input.files && input.files.length > 0;
+    });
+  }
+
   function initForms() {
+    if (!window.fetch || !window.FormData) return;
+
     document.querySelectorAll("form[data-lead-form]").forEach(function (form) {
+      var status = form.querySelector("[data-form-status]");
+      var submitBtn = form.querySelector('[type="submit"]');
+
+      function report(state, message) {
+        if (!status) return;
+        status.textContent = message;
+        status.setAttribute("data-state", state);
+      }
+
       form.addEventListener("submit", function (event) {
-        var endpoint = form.getAttribute("action") || "";
-        var placeholder = endpoint.indexOf("YOUR_FORM_ID") !== -1;
-        if (placeholder) {
-          event.preventDefault();
-          var status = form.querySelector("[data-form-status]");
-          if (status) {
-            status.textContent =
-              "This form isn't wired to a live inbox yet — swap the Formspree ID in " +
-              form.getAttribute("data-lead-form") +
-              " to start receiving these leads by email.";
-            status.setAttribute("data-state", "notice");
-          }
-          return;
-        }
-        var statusOk = form.querySelector("[data-form-status]");
-        if (statusOk) {
-          statusOk.textContent = "Sending your inquiry…";
-          statusOk.setAttribute("data-state", "pending");
-        }
+        event.preventDefault();
+        var data = new FormData(form);
+        // An untouched file input still posts an empty file part, which a free
+        // Formspree plan can reject as an upload — send only real attachments.
+        form.querySelectorAll('input[type="file"]').forEach(function (input) {
+          if (!input.files || input.files.length === 0) data.delete(input.name);
+        });
+        // Subject line carries the lead category so the inbox sorts itself.
+        var category = data.get("Category");
+        data.set("_subject", "New inquiry: " + (category || "General") + " (Dr. Reena Agrawal website)");
+
+        if (submitBtn) submitBtn.disabled = true;
+        report("pending", "Sending your inquiry…");
+
+        postForm(form, data)
+          .then(function (result) {
+            if (result.ok) return { sent: true, droppedFile: false };
+            var errors = (result.body && result.body.errors) || [];
+            var captcha = errors.some(function (e) { return /captcha/i.test(e.code || e.message || ""); });
+            if (captcha) {
+              // The form has reCAPTCHA on, which only works as a normal page submit.
+              HTMLFormElement.prototype.submit.call(form);
+              return { sent: null };
+            }
+            if (hasAttachment(form)) {
+              // Uploads need a paid Formspree plan — resend without the file so
+              // the inquiry itself isn't lost.
+              var withoutFile = new FormData(form);
+              withoutFile.set("_subject", data.get("_subject"));
+              form.querySelectorAll('input[type="file"]').forEach(function (input) { withoutFile.delete(input.name); });
+              withoutFile.set("Attachment note", "Visitor attached a file that could not be uploaded; ask them to resend it.");
+              return postForm(form, withoutFile).then(function (retry) {
+                return { sent: retry.ok, droppedFile: retry.ok, errors: retry.body && retry.body.errors };
+              });
+            }
+            return { sent: false, errors: errors };
+          })
+          .then(function (outcome) {
+            if (outcome.sent === null) return;
+            if (outcome.sent) {
+              form.reset();
+              report("success", outcome.droppedFile
+                ? "Inquiry received — but the attachment couldn't be uploaded. Please WhatsApp it to +91 80802 12851."
+                : "Thank you — your inquiry has been received. Dr. Agrawal's office will be in touch shortly.");
+            } else {
+              var detail = (outcome.errors || []).map(function (e) { return e.message; }).filter(Boolean).join(" ");
+              report("notice", (detail ? detail + " " : "Your inquiry couldn't be sent. ") + "You can also " + CONTACT_FALLBACK + ".");
+            }
+          })
+          .catch(function () {
+            report("notice", "Network problem — your inquiry wasn't sent. Please try again, or " + CONTACT_FALLBACK + ".");
+          })
+          .then(function () {
+            if (submitBtn) submitBtn.disabled = false;
+          });
       });
     });
   }

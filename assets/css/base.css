@@ -283,6 +283,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 /* ---------- Shared form + button sizing ---------- */
 
 .btn { min-height: 44px; }
+.btn:disabled { opacity: 0.6; cursor: progress; }
 
 /* Grid tracks default to min-content; a long <option> would otherwise
    push the whole contact column past a phone's edge. */

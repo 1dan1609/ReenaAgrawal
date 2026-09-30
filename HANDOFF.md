@@ -61,7 +61,7 @@ Detector after fixes: 0 warnings (only the 117 advisories above). It ran DEGRADE
 
 ## Still-open content gaps (never fabricate these)
 
-- **Forms don't deliver yet** — all four post to a `YOUR_FORM_ID` Formspree placeholder. User needs a free Formspree account, then swap the ID in 4 files. `main.js` detects the placeholder and shows a notice instead of silently failing.
+- **Forms are live** (2026-09-30) — all four post to Formspree form `xppwbbdp` via fetch in `main.js` (subject line carries the Category; `email` field sets reply-to). If an attachment is rejected (uploads need a paid Formspree plan), the inquiry is resent without the file and the visitor is asked to WhatsApp it. A reCAPTCHA error falls back to a normal page submit.
 - **No LinkedIn / YouTube links** — requested by the spec, never provided, deliberately omitted.
 - **No real testimonials** — the Leadership page has no testimonials section (the "endorsements being compiled" note was removed at the user's request on 2026-09-30). Add real ones only when provided.
 - **No university names** for the PhD/MA/M.Sc. — degree titles only.
