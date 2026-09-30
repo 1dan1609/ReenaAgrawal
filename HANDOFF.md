@@ -19,7 +19,7 @@ assets/js/   main.js (nav, header-shrink, lightbox, reveal, forms) + root.js
 assets/img/  curated photos + logos (6.6MB)
 ```
 
-Unifying concept: **"one instrument case, four tools."** Shared Bodoni Moda / Source Serif 4 / JetBrains Mono type system, a hand-authored compass-rose seal mark, and a hard-edge (no border-radius) rule across all four worlds. Details in `DESIGN.md`.
+Unifying concept: **"one instrument case, four tools."** Shared Libre Bodoni / Source Serif 4 / JetBrains Mono type system, a hand-authored compass-rose seal mark, and a hard-edge (no border-radius) rule across all four worlds. Details in `DESIGN.md`.
 
 **To preview:** start a local server (Claude-in-Chrome refuses `file://` URLs):
 ```bash
@@ -63,7 +63,7 @@ Detector after fixes: 0 warnings (only the 117 advisories above). It ran DEGRADE
 
 - **Forms don't deliver yet** — all four post to a `YOUR_FORM_ID` Formspree placeholder. User needs a free Formspree account, then swap the ID in 4 files. `main.js` detects the placeholder and shows a notice instead of silently failing.
 - **No LinkedIn / YouTube links** — requested by the spec, never provided, deliberately omitted.
-- **No real testimonials** — leadership page carries an honest "endorsements being compiled" note instead of a fabricated carousel.
+- **No real testimonials** — the Leadership page has no testimonials section (the "endorsements being compiled" note was removed at the user's request on 2026-09-30). Add real ones only when provided.
 - **No university names** for the PhD/MA/M.Sc. — degree titles only.
 - **Leadership vertical has no logo** — uses an authored mini radar-scope glyph + wordmark.
 

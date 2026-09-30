@@ -8,7 +8,7 @@
   --rose-gold-bright: #e3b989;
   --cream: #f7ece0;
 
-  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-display: "Libre Bodoni", "Bodoni 72", Didot, "Times New Roman", serif;
   --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -28,7 +28,7 @@ body {
 
 :focus-visible { outline: 2px solid var(--rose-gold-bright); outline-offset: 3px; }
 
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(--cream); letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(--cream); letter-spacing: 0; word-spacing: 0.08em; line-height: 1.12; }
 
 .eyebrow-mono {
   font-family: var(--font-mono);

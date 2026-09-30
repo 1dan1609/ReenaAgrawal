@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -25 250 250">
+  <rect x="-25" y="-25" width="250" height="250" fill="#f3ede0"/>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#7c2f2a" stroke-width="4"/>
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#7c2f2a" stroke-width="2"/>
+  <g stroke="#7c2f2a" stroke-width="3">
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(0 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(30 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(60 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(90 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(120 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(150 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(180 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(210 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(240 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(270 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(300 100 100)"/>
+    <line x1="100" y1="5" x2="100" y2="17" transform="rotate(330 100 100)"/>
+  </g>
+  <path d="M100,22 L106.1,85.2 L131.1,68.9 L114.8,93.9 L178,100 L114.8,106.1 L131.1,131.1 L106.1,114.8 L100,178 L93.9,114.8 L68.9,131.1 L85.2,106.1 L22,100 L85.2,93.9 L68.9,68.9 L93.9,85.2 Z" fill="#7c2f2a"/>
+  <circle cx="100" cy="100" r="5" fill="#7c2f2a"/>
+</svg>

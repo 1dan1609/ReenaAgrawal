@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Seal mark tuned for 16–32px tabs: ticks dropped, ring and star weighted up. -->
+  <circle cx="100" cy="100" r="98" fill="#f3ede0"/>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#7c2f2a" stroke-width="12"/>
+  <path d="M100.0,20.0 L110.3,75.1 L142.4,57.6 L124.9,89.7 L180.0,100.0 L124.9,110.3 L142.4,142.4 L110.3,124.9 L100.0,180.0 L89.7,124.9 L57.6,142.4 L75.1,110.3 L20.0,100.0 L75.1,89.7 L57.6,57.6 L89.7,75.1 Z" fill="#7c2f2a"/>
+</svg>

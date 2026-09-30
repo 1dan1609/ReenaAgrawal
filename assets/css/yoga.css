@@ -11,7 +11,7 @@
   --ochre-ink: #7b5c2d;     /* ochre deepened for small text on sand (≥4.5:1) */
   --ochre-bright: #c9a061;  /* ochre lifted for text on teal (≥4.5:1) */
 
-  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-display: "Libre Bodoni", "Bodoni 72", Didot, "Times New Roman", serif;
   --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-devanagari: "Noto Sans Devanagari", serif;
@@ -31,7 +31,7 @@ body {
 
 :focus-visible { outline: 2px solid var(--sage-bright); outline-offset: 3px; }
 
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(--teal); letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(--teal); letter-spacing: 0; word-spacing: 0.08em; line-height: 1.12; }
 
 .eyebrow-mono {
   font-family: var(--font-mono);
@@ -284,6 +284,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
   font-family: var(--font-devanagari);
   font-size: 1.6rem;
   color: var(--ochre);
+  line-height: 1.1;
 }
 
 .folio-entry h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }

@@ -36,11 +36,12 @@ colors:
   leadership-amber-bright: "#ffc266"
 typography:
   display:
-    fontFamily: "Bodoni Moda, Times New Roman, serif"
+    fontFamily: "Libre Bodoni, Bodoni 72, Didot, Times New Roman, serif"
     fontSize: "clamp(2.2rem, 5vw, 4.2rem)"
     fontWeight: 500
     lineHeight: 1.05
-    letterSpacing: "-0.01em"
+    letterSpacing: "0"
+    wordSpacing: "0.08em"
   body:
     fontFamily: "Source Serif 4, Georgia, serif"
     fontSize: "1.0625rem"
@@ -124,8 +125,8 @@ Four independent palettes under one shared neutral-ink logic (a near-black/near-
 
 ## Typography
 
-**Display Font:** Bodoni Moda (with Times New Roman, serif fallback) — a high-contrast Didone chosen for its engraved, official-document character: it reads as passport titling, instrument nameplate lettering, and manuscript display type across all four worlds without changing family.
-**Body Font:** Source Serif 4 (with Georgia, serif fallback) — warm and legible, paired to complement Bodoni's contrast rather than compete with it.
+**Display Font:** Libre Bodoni (with Bodoni 72 / Didot / Times New Roman fallbacks) — a high-contrast Didone chosen for its engraved, official-document character. It replaced Bodoni Moda (2026-09-30), whose display optical size thinned its hairlines until large headings looked washed out; Libre Bodoni is the same Bodoni model cut for text sizes, so the hairlines stay visible while the character is unchanged. Headings run at 0 tracking with `word-spacing: 0.08em` (its space is narrow) and `line-height: 1.12`: it reads as passport titling, instrument nameplate lettering, and manuscript display type across all four worlds without changing family.
+**Body Font:** Source Serif 4 (with Georgia, serif fallback) — warm and legible, paired to complement Libre Bodoni's contrast rather than compete with it.
 **Label/Mono Font:** JetBrains Mono — used exclusively for "instrument readout" content: credential data fields, compass bearings, radar coordinates, stat plates, form labels, CTAs.
 **Devanagari Font:** Noto Sans Devanagari — used only on the Yoga vertical, only for the institute's Sanskrit motto (`॥ योगः कर्मसु कौशलम् ॥`) and the folio's verse numerals; never a general body substitute.
 
@@ -199,6 +200,6 @@ A single hand-authored SVG symbol (12 compass ticks, double ring, 8-point compas
 
 ### Don't:
 - **Don't** round any corner, anywhere, on any world.
-- **Don't** invent testimonials, customer quotes, or institution names to fill a content gap — the Leadership gallery's honest "endorsements being compiled" note and Yoga's unattributed degree list are the pattern to follow.
+- **Don't** invent testimonials, customer quotes, or institution names to fill a content gap — leaving the Leadership page without a testimonials section and Yoga's unattributed degree list are the pattern to follow.
 - **Don't** reuse one vertical's ground/ink pairing on another; each world's palette is closed to the other three.
 - **Don't** animate `max-height`, `width`, `height`, or `padding` for reveal/collapse states — use `grid-template-rows`, `transform`, and `opacity`.

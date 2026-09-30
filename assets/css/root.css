@@ -11,7 +11,7 @@
   --gold-foil: #e3c477;
   --stamp-red: #7c2f2a;
 
-  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-display: "Libre Bodoni", "Bodoni 72", Didot, "Times New Roman", serif;
   --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -37,7 +37,9 @@ a { transition: opacity 0.2s ease; }
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
+  word-spacing: 0.08em;
+  line-height: 1.12;
   color: var(--charcoal);
 }
 
