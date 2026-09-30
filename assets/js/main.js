@@ -87,19 +87,29 @@
   function initLightbox() {
     var lightbox = document.getElementById("lightbox");
     if (!lightbox) return;
-    var img = lightbox.querySelector(".lightbox__img");
     var closeBtn = lightbox.querySelector(".lightbox__close");
+    var returnFocusTo = null;
+    var img = null;
 
+    // The <img> only exists while the lightbox is open: an idle img needs a
+    // src, and src="" makes some browsers re-request the page as an image.
     function open(src, alt) {
+      returnFocusTo = document.activeElement;
+      img = document.createElement("img");
+      img.className = "lightbox__img";
       img.src = src;
       img.alt = alt || "";
+      lightbox.appendChild(img);
       lightbox.hidden = false;
       document.body.style.overflow = "hidden";
+      closeBtn.focus();
     }
     function close() {
       lightbox.hidden = true;
-      img.src = "";
+      if (img) { img.remove(); img = null; }
       document.body.style.overflow = "";
+      if (returnFocusTo && typeof returnFocusTo.focus === "function") returnFocusTo.focus();
+      returnFocusTo = null;
     }
 
     document.querySelectorAll("[data-lightbox]").forEach(function (link) {
@@ -115,7 +125,13 @@
       if (event.target === lightbox) close();
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !lightbox.hidden) close();
+      if (lightbox.hidden) return;
+      if (event.key === "Escape") close();
+      // The close button is the dialog's only control, so Tab stays on it.
+      if (event.key === "Tab") {
+        event.preventDefault();
+        closeBtn.focus();
+      }
     });
   }
 

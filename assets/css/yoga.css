@@ -1,6 +1,3 @@
-@import url("base.css");
-@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;600&display=swap");
 
 :root {
   --sand: #f5efdf;
@@ -11,6 +8,8 @@
   --sage: #7c9473;
   --sage-bright: #97b087;
   --ochre: #9c7539;
+  --ochre-ink: #7b5c2d;     /* ochre deepened for small text on sand (≥4.5:1) */
+  --ochre-bright: #c9a061;  /* ochre lifted for text on teal (≥4.5:1) */
 
   --font-display: "Bodoni Moda", "Times New Roman", serif;
   --font-body: "Source Serif 4", Georgia, serif;
@@ -39,7 +38,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ochre);
+  color: var(--ochre-ink);
 }
 
 .seal-mark { color: currentColor; }
@@ -122,7 +121,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 
 .folio-badge {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid rgba(245,239,223,0.4);
@@ -152,7 +151,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 .motto__sanskrit {
   font-family: var(--font-devanagari);
   font-size: 1.3rem;
-  color: var(--ochre);
+  color: var(--ochre-bright);
 }
 
 .motto__gloss {
@@ -176,7 +175,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
   text-transform: uppercase;
   border: 1px solid currentColor;
 }
-.btn--primary { background: var(--ochre); border-color: var(--ochre); color: var(--sand); }
+.btn--primary { background: var(--ochre-ink); border-color: var(--ochre-ink); color: var(--sand); }
 .btn--primary:hover { background: var(--sand); color: var(--teal); border-color: var(--sand); }
 .btn--ghost { color: var(--sand); }
 .btn--ghost:hover { background: var(--sand); color: var(--teal); }
@@ -213,7 +212,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 .folio-verse-no {
   font-family: var(--font-devanagari);
   font-size: 0.9rem;
-  color: var(--ochre);
+  color: var(--ochre-ink);
 }
 
 /* ---------------- Tally-plate stat counters ---------------- */
@@ -254,7 +253,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 
 .tally-plate__label {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(245,239,223,0.7);
@@ -361,7 +360,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
   gap: clamp(2rem, 5vw, 3.5rem);
   align-items: start;
 }
-@media (max-width: 900px) { .contact-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .contact-wrap { grid-template-columns: minmax(0, 1fr); } }
 
 .contact-channels { display: flex; flex-direction: column; gap: 1.1rem; }
 
@@ -402,4 +401,4 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 .site-footer a:hover { opacity: 0.7; }
 .footer-brand .seal-mark { width: 34px; height: 34px; color: var(--ochre); margin-bottom: 1rem; }
 .footer-links li { margin-bottom: 0.6rem; font-size: 0.92rem; }
-.site-footer__bottom { border-top: 1px solid rgba(245,239,223,0.14); color: rgba(245,239,223,0.5); }
+.site-footer__bottom { border-top: 1px solid rgba(245,239,223,0.14); color: rgba(245,239,223,0.7); }

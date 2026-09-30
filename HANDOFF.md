@@ -7,7 +7,7 @@
 
 ## Where things stand
 
-A complete 4-page static site is **built, visually QA'd, and working**. No framework, no build step.
+A complete 4-page static site is **built, audited, fixed, and pushed to GitHub**. No framework, no build step.
 
 ```
 index.html                          Root — "Credential Passport" (ivory/charcoal/gold)
@@ -31,67 +31,31 @@ node -e "const http=require('http'),fs=require('fs'),path=require('path');const 
 
 ## What's next
 
-### 1. Deploy to GitHub (the task that was interrupted)
+### 1. Enable GitHub Pages (user action — no `gh` CLI here)
+Code is pushed to https://github.com/1dan1609/ReenaAgrawal (`main`). In the repo: Settings → Pages → Source "Deploy from a branch" → `main` / `(root)` → Save. Site: https://1dan1609.github.io/ReenaAgrawal/. Relative paths throughout, so the subpath deploy needs no changes — verify after it goes live.
 
-Repo: **https://github.com/1dan1609/ReenaAgrawal** — verified **empty** (`git ls-remote` returns nothing, exit 0).
-
-Verified environment facts:
-- `git` 2.40.1 available; **`gh` CLI is NOT installed**
-- No local git repo in the project dir yet
-- git identity already configured: `1dan1609` / `47774683+1dan1609@users.noreply.github.com`
-
-Steps:
-1. `git init` + create `.gitignore`.
-   **Decision needed from user first:** the raw source folders are 14MB of mostly-unused originals —
-   `Yoga/` (8.3MB), `Leadership/` (5.8MB), `Energy & Spatial Consultant/` (228K), `Logos/` (208K).
-   Only ~21 curated images in `assets/img/` (6.6MB) are actually used by the site.
-   Ask whether to commit the raw folders (useful archive, 22MB repo) or gitignore them (lean ~7MB repo).
-   Also decide on `whatsapp-svgrepo-com.svg` (source file, now inlined into the HTML — safe to remove or ignore).
-2. Commit, `git remote add origin https://github.com/1dan1609/ReenaAgrawal.git`, push to `main`.
-3. **Enable GitHub Pages — the user must do this in the browser** (no `gh` CLI):
-   Repo → Settings → Pages → Source: "Deploy from a branch" → Branch: `main` → Folder: `/ (root)` → Save.
-   Site will be at `https://1dan1609.github.io/ReenaAgrawal/`.
-4. Relative paths were used throughout, so a project-subpath deploy works without changes. Verify after deploy.
-
-### 2. Finish the audit (was in progress, interrupted)
-
-`/impeccable audit` was ~70% done. Findings below are **verified, not guesses** — keep them.
-Still to do: formal 0–4 scoring per dimension, mobile-width runtime verification, energy-page motion check.
+### 2. Remaining polish (P3, optional)
+- 17 literal colours outside tokens and 100 font sizes off the DESIGN.md ramp (detector advisories) → `/impeccable polish`.
+- Instrument-graphic labels (compass bearings, radar blip labels) stay at 0.68rem (~10.9px) so they don't collide inside the graphics.
+- Header brand link and footer links are 30–32px tall: they pass WCAG 2.5.8 AA (24px) but not the 44px AAA guideline.
 
 ---
 
-## Audit findings (verified)
+## Audit — 2026-09-30 (`/impeccable audit`, then fixes)
 
-### Contrast failures — WCAG AA (4.5:1 for body/small text), computed not eyeballed
+**Before fixes: 12/20.** Accessibility 2, Performance 2, Responsive 2, Theming 3, Integrity 3.
 
-| Page | Pair | Ratio | Where it's used |
-|---|---|---|---|
-| Yoga | ochre `#9c7539` on teal `#223b36` | **2.87** | `.motto__sanskrit` — the Sanskrit motto, a prominent brand element |
-| Lead | slate@0.7 on navy-deep | **2.88** | `.site-footer__bottom` |
-| Root | gold `#a9782f` on ivory-deep `#ece3d1` | **3.04** | `.field label` inside `.form-card` |
-| Root | gold `#a9782f` on ivory `#f3ede0` | **3.32** | `.eyebrow-mono`, `.bio-data__type`, `.bio-data__fields dt`, `.visa-panel__no` |
-| Yoga | ochre `#9c7539` on sand `#f5efdf` | **3.65** | `.eyebrow-mono`, `.folio-entry__no` |
-| Lead | slate `#6c8296` on navy `#0c2136` | **4.10** | `.contact-card li`, `.credential-plate__label` |
-| Yoga | sand@0.5 on `#1a302b` | **4.25** | `.site-footer__bottom` |
-| Energy | blush@0.55 on oxblood-deep | **4.32** | `.site-footer__bottom` |
+Fixed and browser-verified (375px + 1280px, all 4 pages):
+- **Contact form cut off on phones** (Yoga/Energy/Leadership): the mobile `1fr` grid track grew to the service `<select>`'s min-content (408px on a 375px screen) and `html { overflow-x: hidden }` clipped it. Fixed with `minmax(0, 1fr)`, `min-width: 0` on grid children and `width: 100%` on fields (base.css). **The earlier ~500px check missed this — always test at 375px.**
+- **Contrast:** all failing pairs fixed via new tokens (root `--gold-ink`, yoga `--ochre-ink` / `--ochre-bright`, leadership `--slate` lifted to #768b9d) and brighter footer fine print. Also caught the Yoga primary button (sand on ochre, 3.65:1), which the old table missed. Computed in-browser afterwards: 0 real failures on all 4 pages.
+- **Lightbox:** `role="dialog"` + `aria-modal`, focus moves to the close button and returns on close, Tab is trapped, the `<img>` is created on open and removed on close (no empty `src`), close button now square (Hard-Edge Rule).
+- **Nav dropdown:** `aria-controls="verticals-menu"` (deliberately not `aria-haspopup` — it's a disclosure, not an ARIA menu).
+- **Touch targets:** footer links padded to ≥24px; mobile nav items, menu toggle and `.btn` are 44px min.
+- **Motion:** one `prefers-reduced-motion` block in base.css covers reveals (fade only), compass needle, radar sweep and blips, nav transitions and smooth scroll. The header no longer animates padding/height: padding is constant and the sub-brand mark scales via `transform`.
+- **Performance:** photos re-encoded (mozjpeg q74, full-size 5.84MB → 3.05MB) plus `-800.jpg` variants served via `srcset` (≈55KB each; verified a 265px tile loads the 800w file). AoLI logo 100KB → 6KB. Fonts load via parallel `<link>`s with preconnect instead of a chained `@import`.
+- **Small labels** raised from 0.62–0.68rem to 0.72rem.
 
-Everything else passed, including all body text, headings and buttons. **The Energy page passes every check.**
-Recompute with `scratchpad/contrast.mjs` (script written this session) after any palette change.
-
-### Other verified issues
-
-- **Lightbox `<img src="">`** on yoga + leadership pages — empty `src` makes some browsers re-request the page URL as an image. Detector flags it as `broken-image`. Use no `src` attribute until opened.
-- **Lightbox a11y** — missing `role="dialog"`, `aria-modal="true"`, focus trap, and focus-return-on-close.
-- **`prefers-reduced-motion` is under-covered** — only `.radar-sweep` is handled. Four `.radar-blip` infinite pulse animations (2.4s) keep running, and the energy page's `needle-settle` isn't covered either.
-- **Touch targets** — 6 footer links render at 20px height, below the WCAG 2.5.8 AA minimum of 24×24. Several nav/CTA elements are 31–37px (below the 44px AAA guideline).
-- **Layout-property animation** — `transition: padding` on `.site-header__inner` and `transition: height` on `.site-header__submark` (both from the scroll-shrink header). Detector `layout-transition` warnings.
-- **`aria-haspopup`** missing on `.nav-dropdown-trigger`.
-- **Image payload** — 6.6MB across 21 images, 13 of them over 300KB, no `srcset`. Biggest perf issue; matters for Indian mobile networks. No image-compression CLI was available in-session (`sharp` did install fine into the scratchpad via npm, so compression IS achievable — that's the path if asked).
-- **Theming drift** — literal color values outside tokens: root 13 lines, yoga 20, energy 9, leadership 6. Plus 100 advisory font-sizes off the `DESIGN.md` type ramp.
-
-### Clean / good
-
-Heading hierarchy correct on all 4 pages (single `h1`, descending). Every image has alt text. Every form input has an associated `<label>`. `.nav-toggle` has correct `aria-expanded`/`aria-controls`/`aria-label`. No horizontal overflow at desktop. Every multi-column grid has a mobile fallback.
+Detector after fixes: 0 warnings (only the 117 advisories above). It ran DEGRADED (its parser modules aren't installed), so contrast came from an in-browser computation rather than the detector.
 
 ---
 

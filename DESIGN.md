@@ -8,6 +8,7 @@ colors:
   root-charcoal: "#2a2620"
   root-charcoal-soft: "#514a3d"
   root-gold: "#a9782f"
+  root-gold-ink: "#825c24"
   root-gold-bright: "#c99a3f"
   root-gold-foil: "#e3c477"
   root-stamp-red: "#7c2f2a"
@@ -19,6 +20,8 @@ colors:
   yoga-sage: "#7c9473"
   yoga-sage-bright: "#97b087"
   yoga-ochre: "#9c7539"
+  yoga-ochre-ink: "#7b5c2d"
+  yoga-ochre-bright: "#c9a061"
   energy-oxblood: "#4a0e22"
   energy-oxblood-deep: "#2b0713"
   energy-blush: "#efc9b4"
@@ -27,7 +30,7 @@ colors:
   energy-cream: "#f7ece0"
   leadership-navy: "#0c2136"
   leadership-navy-deep: "#071522"
-  leadership-slate: "#6c8296"
+  leadership-slate: "#768b9d"
   leadership-white: "#f2f5f7"
   leadership-amber: "#f2a93c"
   leadership-amber-bright: "#ffc266"
@@ -92,13 +95,15 @@ Four independent palettes under one shared neutral-ink logic (a near-black/near-
 - **Ivory** (`#f3ede0`): primary page ground, laid-paper texture.
 - **Charcoal** (`#2a2620`): primary ink, headings, the Endorsements section ground.
 - **Warm Gold** (`#a9782f`) / **Gold Foil** (`#e3c477`): accreditation accents, borders, the CTA hover state.
+- **Gold Ink** (`#825c24`): gold deepened for small mono labels on ivory — Warm Gold itself fails 4.5:1 there.
 - **Stamp Red** (`#7c2f2a`): used only for the passport/visa "ink stamp" seal marks — never for text or UI chrome.
 
 ### Yoga — Sutra Folio (Art of Learning Institute)
 - **Sand** (`#f5efdf`): page ground, drawn from the institute logo's cream field.
 - **Teal** (`#223b36`): primary ink and the hero/contact band ground, drawn directly from the logo's figure color.
 - **Sage** (`#7c9473`) / **Sage Bright** (`#97b087`): secondary accent, marginalia, links on dark ground.
-- **Ochre** (`#9c7539`): verse numerals, badges, the logo's circle tone.
+- **Ochre** (`#9c7539`): large verse numerals, marks and linework, the logo's circle tone.
+- **Ochre Ink** (`#7b5c2d`) / **Ochre Bright** (`#c9a061`): ochre for small text — deepened on sand (eyebrows, small numerals, the primary button fill), lifted on teal (the Sanskrit motto).
 
 ### Energy & Spatial Consultant — Navigational Instrument (Divine Power)
 - **Oxblood** (`#4a0e22`) / **Oxblood Deep** (`#2b0713`): page ground — taken directly from the confirmed Divine Power logo, replacing the brief's placeholder indigo/amethyst.
@@ -108,11 +113,12 @@ Four independent palettes under one shared neutral-ink logic (a near-black/near-
 
 ### Leadership & Mindset Coach — Radar Scope
 - **Navy** (`#0c2136`) / **Navy Deep** (`#071522`): page ground, the scope housing.
-- **Slate** (`#6c8296`): secondary/body text on navy (~4.8:1 contrast — the floor for body text on this ground).
+- **Slate** (`#768b9d`): secondary/body text on navy (4.63:1 — lifted from #6c8296, which measured only 4.10:1; this is the floor for text on this ground).
 - **White** (`#f2f5f7`): primary text.
 - **Amber** (`#f2a93c`) / **Amber Bright** (`#ffc266`): the radar "contact" color — blips, sweep, CTAs, stat numerals.
 
 ### Named Rules
+**The Text-Ink Rule.** A world's metallic accent is for marks, linework and large type; any small text in that hue uses the world's ink variant (gold-ink, ochre-ink / ochre-bright) so every label clears 4.5:1.
 **The One Hand, Four Grounds Rule.** Every world uses the same ink-on-ground logic (one primary ink, one ground, one warm metallic accent) so the four pages read as siblings despite sharing no hex values.
 **The Stamp-Color Rule.** A world's "ink stamp" color (root's stamp-red) is reserved for literal seal/stamp marks and never bleeds into body text, links, or UI chrome.
 

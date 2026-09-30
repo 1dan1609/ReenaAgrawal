@@ -73,13 +73,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
-  transition: padding 0.25s ease;
-}
-
-.site-header[data-scrolled="true"] .site-header__inner {
-  padding-top: 0.55rem;
-  padding-bottom: 0.55rem;
+  padding: 0.8rem clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .site-header__brands {
@@ -105,11 +99,12 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   height: 34px;
   width: auto;
   display: block;
-  transition: height 0.25s ease;
+  transform-origin: left center;
+  transition: transform 0.25s ease;
 }
 
 .site-header[data-scrolled="true"] .site-header__submark {
-  height: 24px;
+  transform: scale(0.72);
 }
 
 @media (max-width: 1080px) {
@@ -193,7 +188,14 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 }
 
 @media (max-width: 860px) {
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+
+  .nav-menu > li > a,
+  .nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
 
   .nav-menu {
     position: fixed;
@@ -272,6 +274,28 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   }
 }
 
+/* Footer links sit in stacked lists — give each a 24px+ hit area (WCAG 2.5.8). */
+.site-footer__inner li a {
+  display: inline-block;
+  padding-block: 0.25rem;
+}
+
+/* ---------- Shared form + button sizing ---------- */
+
+.btn { min-height: 44px; }
+
+/* Grid tracks default to min-content; a long <option> would otherwise
+   push the whole contact column past a phone's edge. */
+.contact-wrap > * { min-width: 0; }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
 /* ---------- Shared skip link ---------- */
 
 .skip-link {
@@ -315,7 +339,6 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   right: clamp(1rem, 3vw, 2rem);
   width: 44px;
   height: 44px;
-  border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
@@ -327,3 +350,31 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 }
 
 .lightbox__close:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* ---------- Reduced motion ----------
+   Keep every state change (reveals still fade in, the header mark still
+   shrinks) but drop travel, rotation and looping pulses. */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  [data-reveal] {
+    transform: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  .site-header__submark,
+  .nav-menu,
+  .nav-dropdown,
+  .nav-dropdown-collapse,
+  .nav-dropdown-trigger .chevron {
+    transition: none;
+  }
+
+  /* Page stylesheets load after base.css, so these need the extra weight. */
+  .compass-needle { animation: none !important; }
+
+  .radar-sweep { animation: none !important; opacity: 0.15; }
+
+  .radar-blip { animation: none !important; opacity: 0.9 !important; }
+}
