@@ -248,7 +248,7 @@ h1, h2, h3, h4 {
     grid-template-columns: 1fr;
     background: var(--ivory);
   }
-  .passport-photo { margin: 0 auto clamp(1.75rem, 4vw, 3rem); order: -1; aspect-ratio: 16/10; }
+  .passport-photo { margin: 2rem auto clamp(1.75rem, 4vw, 3rem); order: -1; width: min(calc(100% - 4rem), 340px); }
 }
 
 /* ---------------- Section shell ---------------- */

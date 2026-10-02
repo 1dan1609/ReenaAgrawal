@@ -30,7 +30,7 @@
       document.querySelectorAll(".nav-item--dropdown").forEach(function (item) {
         if (!item.contains(event.target)) item.setAttribute("data-open", "false");
       });
-      if (menu && !menu.contains(event.target) && event.target !== toggle) {
+      if (menu && !menu.contains(event.target) && !(toggle && toggle.contains(event.target))) {
         menu.setAttribute("data-open", "false");
         if (toggle) toggle.setAttribute("aria-expanded", "false");
       }
@@ -54,12 +54,6 @@
     });
   }
 
-  function hasAttachment(form) {
-    return Array.prototype.some.call(form.querySelectorAll('input[type="file"]'), function (input) {
-      return input.files && input.files.length > 0;
-    });
-  }
-
   function initForms() {
     if (!window.fetch || !window.FormData) return;
 
@@ -76,11 +70,6 @@
       form.addEventListener("submit", function (event) {
         event.preventDefault();
         var data = new FormData(form);
-        // An untouched file input still posts an empty file part, which a free
-        // Formspree plan can reject as an upload — send only real attachments.
-        form.querySelectorAll('input[type="file"]').forEach(function (input) {
-          if (!input.files || input.files.length === 0) data.delete(input.name);
-        });
         // Subject line carries the lead category so the inbox sorts itself.
         var category = data.get("Category");
         data.set("_subject", "New inquiry: " + (category || "General") + " (Dr. Reena Agrawal website)");
@@ -90,7 +79,7 @@
 
         postForm(form, data)
           .then(function (result) {
-            if (result.ok) return { sent: true, droppedFile: false };
+            if (result.ok) return { sent: true };
             var errors = (result.body && result.body.errors) || [];
             var captcha = errors.some(function (e) { return /captcha/i.test(e.code || e.message || ""); });
             if (captcha) {
@@ -98,26 +87,13 @@
               HTMLFormElement.prototype.submit.call(form);
               return { sent: null };
             }
-            if (hasAttachment(form)) {
-              // Uploads need a paid Formspree plan — resend without the file so
-              // the inquiry itself isn't lost.
-              var withoutFile = new FormData(form);
-              withoutFile.set("_subject", data.get("_subject"));
-              form.querySelectorAll('input[type="file"]').forEach(function (input) { withoutFile.delete(input.name); });
-              withoutFile.set("Attachment note", "Visitor attached a file that could not be uploaded; ask them to resend it.");
-              return postForm(form, withoutFile).then(function (retry) {
-                return { sent: retry.ok, droppedFile: retry.ok, errors: retry.body && retry.body.errors };
-              });
-            }
             return { sent: false, errors: errors };
           })
           .then(function (outcome) {
             if (outcome.sent === null) return;
             if (outcome.sent) {
               form.reset();
-              report("success", outcome.droppedFile
-                ? "Inquiry received — but the attachment couldn't be uploaded. Please WhatsApp it to +91 80802 12851."
-                : "Thank you — your inquiry has been received. Dr. Agrawal's office will be in touch shortly.");
+              report("success", "Thank you — your inquiry has been received. Dr. Agrawal's office will be in touch shortly.");
             } else {
               var detail = (outcome.errors || []).map(function (e) { return e.message; }).filter(Boolean).join(" ");
               report("notice", (detail ? detail + " " : "Your inquiry couldn't be sent. ") + "You can also " + CONTACT_FALLBACK + ".");

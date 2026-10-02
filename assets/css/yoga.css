@@ -198,6 +198,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
 .yantra-mark .yantra-tri-minor { stroke: var(--ochre); opacity: 0.75; }
 .yantra-mark .yantra-bindu { fill: var(--ochre); }
 
+@media (max-width: 860px) {
+  .folio-hero__inner { grid-template-columns: 1fr; }
+  .folio-hero__portrait { order: -1; min-height: 0; }
+  .yantra-mark { width: min(62%, 240px); }
+}
+
 /* ---------------- Section shell ---------------- */
 
 .section {

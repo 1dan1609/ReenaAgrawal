@@ -265,12 +265,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; color: var(
   font-family: var(--font-body);
   color: var(--cream);
 }
-.field input[type="file"] { padding: 0.55rem 0.5rem; font-size: 0.85rem; }
 .field input::placeholder, .field textarea::placeholder { color: rgba(247,236,224,0.35); }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--rose-gold); outline-offset: 1px; }
 .field textarea { resize: vertical; min-height: 90px; }
 .field select option { color: #222; }
 .field-hint { font-size: 0.78rem; color: var(--blush); opacity: 0.75; margin-top: -0.2rem; }
+.field-hint a { color: inherit; text-decoration: underline; }
 
 .form-status { font-family: var(--font-mono); font-size: 0.8rem; margin-top: 0.6rem; min-height: 1.2em; color: var(--rose-gold-bright); }
 .form-status[data-state="notice"] { color: #f0c299; }
