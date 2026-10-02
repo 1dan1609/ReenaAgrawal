@@ -1,0 +1,35 @@
+/* Phone-only refinements shared by all four pages. Loaded after each page's
+   own stylesheet so these win at equal specificity. Nothing here applies
+   above 860px, so desktop is untouched. */
+
+@media (max-width: 860px) {
+  /* The closed off-canvas menu is fixed and parked past the right edge.
+     Chromium on Android counts it toward page width, so the page can be
+     panned sideways. `clip` (unlike `hidden`) makes no scroll container,
+     so the sticky header keeps working. */
+  html, body { overflow-x: clip; }
+
+  /* Tap targets: 44px minimum. */
+  .site-brand,
+  .visa-panel__link,
+  .site-footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Small mono labels: 12px and up (they sat at 11.2-11.5px). */
+  .eyebrow-mono,
+  .field label,
+  .folio-badge,
+  .tally-plate__label,
+  .credential-plate__label,
+  .contact-card__range,
+  .visa-panel__no,
+  .visa-panel__brand,
+  .bio-data__type,
+  .bio-data__fields dt,
+  .bearing-block__deg small {
+    font-size: 0.78rem;
+  }
+}

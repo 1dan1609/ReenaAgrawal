@@ -188,7 +188,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 }
 
 @media (max-width: 860px) {
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; position: relative; z-index: 1; }
 
   .nav-menu > li > a,
   .nav-dropdown-trigger {
@@ -205,7 +205,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    padding: 5.5rem 1.75rem 2rem;
+    padding: 4.75rem 1.75rem 2rem;
     transform: translateX(100%);
     transition: transform 0.35s ease;
     overflow-y: auto;
@@ -238,6 +238,18 @@ h1, h2, h3, h4, p, figure { margin: 0; }
     min-height: 0;
     overflow: hidden;
   }
+}
+
+/* ---------- Section rhythm ----------
+   Every .section pads top and bottom equally, so two stacked on the page
+   normal background doubled the gap between them (and likewise a plain hero
+   above a plain section). Only the first of a pair keeps its padding; banded
+   sections (own background) keep theirs so the band edge has room. */
+.section + .section:not(.contact-band):not(.booking-band),
+.hero + .section,
+.radar-hero + .section,
+.instrument-hero + .section {
+  padding-top: 0;
 }
 
 /* ---------- Shared footer skeleton ---------- */
