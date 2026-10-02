@@ -155,14 +155,6 @@ h1, h2, h3, h4 {
   gap: 1.75rem;
 }
 
-.bio-data__type {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold-ink);
-}
-
 .bio-data__name {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
   line-height: 0.98;
@@ -254,7 +246,6 @@ h1, h2, h3, h4 {
   }
   .bio-data { display: contents; }
   .bio-data > * { position: relative; z-index: 2; }
-  .bio-data__type { order: 1; }
   .bio-data__name { order: 2; }
   .bio-data__tagline { order: 3; }
   .passport-photo { margin: 0.25rem auto; order: 4; width: min(100%, 340px); }
